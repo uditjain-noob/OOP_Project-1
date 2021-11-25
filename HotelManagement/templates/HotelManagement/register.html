@@ -9,7 +9,7 @@
 </head>
 <body>
     <h3>Registration Page</h3>
-    <form method="post" id="reg_form"> {% csrf_token %}
+    <form method="post" id="reg_form" action="http://127.0.0.1:8000/verify/"> {% csrf_token %}
         <div class="form-group">
             <label for="Name">Name: </label>
             <input id="Name" type="text" name="Name" value="{{ name }}">
@@ -24,26 +24,36 @@
             <label for="PWD">Password: </label>
             <input id="PWD" type="text" name="PWD" value="{{ pwd }}"></input>
         <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">submit</button>
     </form>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
     <script>
         window.onload = function() {
             if (localStorage){
                 document.getElementById("reg_form").addEventListener("submit", function(){
+                    localStorage.clear();
                     var nameLocal = document.getElementById("Name").value;
                     var emailLocal = document.getElementById("Email").value;
                     var pwdLocal = document.getElementById("PWD").value;
 
-                    localStorage.setItem("nameLocal", name_local);
+                    localStorage.setItem("nameLocal", nameLocal);
                     localStorage.setItem("emailLocal", emailLocal);
                     localStorage.setItem("pwdLocal", pwdLocal);
+
+
+                    // let r = (Math.random() + 1).toString(36).substring(7);
+                    // console.log("random", r);
+                    // localStorage.setItem("verif", r);
+
+
+                    var form = document.createElement("form");
+                    form.setAttribute("method", "post");
+                    // form.setAttribute("action", "");
                 });
             }
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
