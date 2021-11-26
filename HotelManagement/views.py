@@ -4,23 +4,6 @@ from django.core.mail import send_mail
 import requests
 from string import ascii_lowercase, ascii_uppercase, digits
 from random import choices
-<<<<<<< HEAD
-=======
-
-import HotelManagement
-# Create your views here.
-global arr
-arr = {
-    "Name" : None,
-    "Email" : None,
-    "phone_num" : None,
-    "PWD": None,
-    "rooms": None,
-    "checkin": None,
-    "checkout":None,
-    "verification_code": None
-}
->>>>>>> 1dddead0bf26edd5cce765210c73f57648faddf8
 
 import HotelManagement
 # Create your views here.
@@ -39,12 +22,9 @@ import HotelManagement
 def home(request):
     return render(request, 'HotelManagement/index.html')
 
-<<<<<<< HEAD
 def login(request):
     return render(request, 'HotelManagement/login.html')
 
-=======
->>>>>>> 1dddead0bf26edd5cce765210c73f57648faddf8
 def register(request):  
     return render(request, 'HotelManagement/register.html')
 
