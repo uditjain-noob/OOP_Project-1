@@ -20,3 +20,5 @@ class User(models.Model):
     phone_num = models.CharField(max_length=10)
     encrypt_pwd = models.CharField(max_length=50, default=" ")
     rooms = models.CharField(max_length=150, default = " ")
+    check_in = models.DateField(default = timezone.now)
+    check_out = models.DateField(default = timezone.now)
