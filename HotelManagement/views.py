@@ -64,7 +64,7 @@ def verify(request):
                      }"""
 
         response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
-        print(response.text)
+        # print(response.text)
 
         context["Name"] = Name
         context["Email"] = Email
@@ -80,15 +80,18 @@ def reg_result(request):
         password =request.GET.get('password', None)
 
         print(username, email, password)
-
-        if request.GET.get('valid') == 1:
-            
-            user_data = User(name = username, email = email, encrypt_pwd = password)
-            user_data.save()
+        validity = request.GET.get('valid')
+        print(validity, type(validity), int(validity))
+        validity = int(validity)
+        if validity == 1:
+            print("here")
 
             responseData = {
                 'message' : 'Accepted'
             }
+            user_data = User(name = username, email = email, encrypt_pwd = password)
+            user_data.save()
+
         else:
             responseData = {
                 'message' : 'Not accepted'
