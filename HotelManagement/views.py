@@ -49,7 +49,7 @@ def verify(request):
 
         url = "https://email-sender1.p.rapidapi.com/"
 
-        querystring = {"txt_msg":"test of the body","to":Email, "from":"Team 20","subject":"Greetings","html_msg":f"<html><body><b>Hello, {Name}</b><br>{random_str}</body></html>"}
+        querystring = {"txt_msg":"test of the body","to":Email, "from":"Team 20","subject":"OTP verification","html_msg":f"<html><body><b>Welcome! {Name} to Ocean Pearl</b><br>{random_str}</body></html>"}
 
         headers = {
         'content-type': "application/json",
