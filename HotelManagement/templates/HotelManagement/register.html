@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,26 +8,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'HotelManagement/cStyle.css' %}">
 </head>
 <body>
-    <h3>Registration Page</h3>
-    <form method="post" id="reg_form" action="http://127.0.0.1:8000/verify/"> {% csrf_token %}
-        <div class="form-group">
-            <label for="Name">Name: </label>
-            <input id="Name" type="text" name="Name" value="{{ name }}">
-        </div>
-        <div class="form-group">
-            <label for="Email">Email: </label>
-            <input id="Email" type="email" name="Email" value="{{ email }}">
-        <div class="form-group">
-        <!-- <label for="PhoneNo">Phone Number: </label>
-        <input id="PhoneNo" type="text" name="PhoneNo" value="{{ phone_num }}"></input> -->
-        <div class="form-group"></div>
-            <label for="PWD">Password: </label>
-            <input id="PWD" type="text" name="PWD" value="{{ pwd }}"></input>
-        <div class="form-group">
-        <button type="submit" class="btn btn-primary">submit</button>
-    </form>
+    <div class="regPageContent">
+            <form class="regForm" method="post" id="reg_form" action="http://127.0.0.1:8000/verify/"> {% csrf_token %}
+                <h3>Register Here</h3>
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input id="Name" type="text" placeholder="Name" name="Name" value="{{ name }}">
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input id="Email" type="email" placeholder="Email" name="Email" value="{{ email }}">
+                </div>
+                <!-- <div class="form-group">
+                    <label for="PhoneNo">Phone Number: </label>
+                    <input id="PhoneNo" type="text" name="PhoneNo" value="{{ phone_num }}"></input>
+                </div> -->
+                <div class="form-group"></div>
+                    <label for="PWD">Password</label>
+                    <input id="PWD" type="password" placeholder="Password" name="PWD" value="{{ pwd }}"></input>
+                <div class="form-group">
+                    <button type="submit">Register Now</button>
+                </div>
+            </form>
+
+            <div class="backgroundImage">
+                <img src="{% static 'HotelManagement/images/homePageBGFinal.jpg' %}" alt="">
+            </div>
+    </div>
+    
     <script>
         window.onload = function() {
             if (localStorage){
@@ -43,6 +60,7 @@
                     // let r = (Math.random() + 1).toString(36).substring(7);
                     // console.log("random", r);
                     // localStorage.setItem("verif", r);
+                    console.log(nameLocal);
 
 
                     var form = document.createElement("form");
