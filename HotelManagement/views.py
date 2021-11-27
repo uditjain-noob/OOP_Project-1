@@ -27,7 +27,6 @@ def login(request):
 
 def register(request):  
     return render(request, 'HotelManagement/register.html')
-    # return render(request, 'HotelManagement/newRegister.html')
 
 def verify(request):
     context = {
@@ -42,7 +41,6 @@ def verify(request):
         Email = request.POST.get('Email', '')
         # phone_num = request.POST.get('PhoneNo','')
         PWD = request.POST.get('PWD', '')
-        print(PWD, type(PWD))
         print(Email)
 
         random_str = "".join(choices(ascii_uppercase + ascii_lowercase + digits, k=6))
@@ -63,7 +61,6 @@ def verify(request):
                       \"key2\": \"value\"\r
                      }"""
 
-        print(Name)
         response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
         print(response.text)
 
