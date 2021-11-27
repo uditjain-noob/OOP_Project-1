@@ -79,12 +79,13 @@ def reg_result(request):
         email = request.GET.get('email', None)
         password =request.GET.get('password', None)
 
-        user_data = User(name = username, email = email, encrypt_pwd = password)
-        user_data.save()
-
         print(username, email, password)
 
         if request.GET.get('valid') == 1:
+            
+            user_data = User(name = username, email = email, encrypt_pwd = password)
+            user_data.save()
+
             responseData = {
                 'message' : 'Accepted'
             }
