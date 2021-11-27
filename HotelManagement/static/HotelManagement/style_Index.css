@@ -141,16 +141,14 @@ header {
     padding-bottom: 50px;
 }
 
-.homeContent a {
+.underscore a {
     font-size: 30px;
     color: wheat;
 }
 
-#underscore:before {
+.underscore a:before {
     content: "a";
     position: absolute;
-    bottom: 250px;
-    /* left: 695px; */
     left: 50%;
     background-color: white;
     width: 0%;
@@ -159,7 +157,8 @@ header {
     transition: all 0.5s ease;
 }
 
-#underscore:hover:before {
+.underscore a:hover:before {
     width: 9.4%;
-    left: 695px;
+    left: 45.3%;
 }
+
