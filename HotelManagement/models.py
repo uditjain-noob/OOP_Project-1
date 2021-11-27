@@ -17,6 +17,6 @@ class User(models.Model):
     # id = models.IntegerField(default=0, primary_key=True, auto_created=True)
     name = models.CharField(max_length=50, default=" ")
     email = models.CharField(max_length=100, default=" ")
-    phone_num = models.CharField(max_length=10)
+    # phone_num = models.CharField(max_length=10)
     encrypt_pwd = models.CharField(max_length=50, default=" ")
-    rooms = models.CharField(max_length=150, default = " ")
+    rooms = models.CharField(max_length=150, default = "{}")
