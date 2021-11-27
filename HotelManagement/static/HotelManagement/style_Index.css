@@ -150,6 +150,7 @@ header {
 .underscore a:before {
     content: "a";
     position: absolute;
+    margin-top: 33px;
     left: 50%;
     background-color: white;
     width: 0%;
@@ -159,8 +160,8 @@ header {
 }
 
 .underscore a:hover:before {
-    width: 9.4%;
-    left: 45.3%;
+    width: 8.32%;
+    left: 45.8%;
 }
 
 /* testing bot */
