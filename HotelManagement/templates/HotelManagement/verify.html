@@ -35,7 +35,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script>
-        // localStorage.setItem("Name", {{ Name }});
+
         function submitCode()
         {
             form_verify = document.getElementById("code_form");
@@ -76,13 +76,14 @@
                             'valid': 0
                         },
                         dataType: 'json',
-                        success: function(responseData){
+                        success: function (responseData) 
+                        {
                             alert(responseData.message);
                         }
                     }
                 )
                 form_verify.submit()
-                console.log("Invalid")
+                // console.log("Invalid")
             }
         }
         // console.log(b);

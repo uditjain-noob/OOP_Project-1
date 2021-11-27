@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 import requests
 from string import ascii_lowercase, ascii_uppercase, digits
 from random import choices
+from .models import User, Room, Schedule
 
 import HotelManagement
 # Create your views here.
@@ -77,6 +78,9 @@ def reg_result(request):
         username = request.GET.get('name', None)
         email = request.GET.get('email', None)
         password =request.GET.get('password', None)
+
+        user_data = User(name = username, email = email, encrypt_pwd = password)
+        user_data.save()
 
         print(username, email, password)
 
