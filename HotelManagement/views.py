@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
@@ -70,3 +71,23 @@ def verify(request):
         context["verification_code"] = random_str
 
     return render(request, 'HotelManagement/verify.html', context)
+
+def reg_result(request):
+    if request.method == "GET":
+        username = request.GET.get('name', None)
+        email = request.GET.get('email', None)
+        password =request.GET.get('password', None)
+
+        print(username, email, password)
+
+        if request.GET.get('valid') == 1:
+            responseData = {
+                'message' : 'Accepted'
+            }
+        else:
+            responseData = {
+                'message' : 'Not accepted'
+            }
+    # return render(request, 'HotelManagement/reg_result.html')
+    return JsonResponse(responseData)
+    
