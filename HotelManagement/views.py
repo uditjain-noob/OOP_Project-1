@@ -5,7 +5,8 @@ from django.core.mail import send_mail
 import requests
 from string import ascii_lowercase, ascii_uppercase, digits
 from random import choices
-from .models import User, Room, Schedule
+from .models import User, Room, Schedule    
+import sqlite3
 
 import HotelManagement
 # Create your views here.
@@ -64,7 +65,7 @@ def verify(request):
                      }"""
 
         response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
-        # print(response.text)
+        print(response.text)
 
         context["Name"] = Name
         context["Email"] = Email
@@ -84,13 +85,31 @@ def reg_result(request):
         print(validity, type(validity), int(validity))
         validity = int(validity)
         if validity == 1:
-            print("here")
+            
+            db = sqlite3.connect('db.sqlite3')
+            cur = db.cursor()
 
-            responseData = {
-                'message' : 'Accepted'
-            }
-            user_data = User(name = username, email = email, encrypt_pwd = password)
-            user_data.save()
+            cur.execute('''
+            SELECT email FROM HotelManagement_user;
+            ''')
+
+            email_list = cur.fetchall()
+            email_list = [e[0] for e in email_list]
+            print(email_list)
+
+            if email in email_list:
+
+                responseData = {
+                'message' : 'Email already in use'
+                }
+                
+            else:
+
+                responseData = {
+                    'message' : 'Accepted'
+                }
+                user_data = User(name = username, email = email, encrypt_pwd = password)
+                user_data.save()
 
         else:
             responseData = {
