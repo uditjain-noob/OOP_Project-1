@@ -1,0 +1,92 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Hotel Room Booking</title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <!-- Font - Comforter Brush -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap" rel="stylesheet">
+
+        <!-- Font - Dancing Script -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Dancing+Script&family=Varela+Round&display=swap" rel="stylesheet"> 
+
+        <!-- Font - Varela Round -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Dancing+Script&family=Varela+Round&display=swap" rel="stylesheet">
+    </head>
+    <body style="background:wheat;">
+        <header class="text-gray-600 body-font">
+            <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+              <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-red-300 rounded-full" viewBox="0 0 24 24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="ml-3 text-xl" style="font-family: 'Varela Round', sans-serif; font-weight: 600; font-size: 25px;">Rooms</span>
+              </a>
+              <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+                <a href="/"class="mr-5 hover:text-gray-900"></a>
+              </nav>
+              <button class="inline-flex items-center  border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0"><a href="http://127.0.0.1:8000" style="font-family: 'Varela Round', sans-serif; font-weight: 600; font-size: 18px; color: black;">Home</a>
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24" style="color:black">
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+          </header>
+          <section class="text-gray-600 body-font">
+            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+              <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900" style="font-family: 'Dancing Script', cursive; font-weight: 600;">Delux Suite Bedroom
+                  <br class="hidden lg:inline-block">
+                </h1>
+                <p class="mb-8 leading-relaxed" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;">The Deluxe Suites are elegantly appointed two-room units, each with a separate sitting room and bedroom. The suites offer a beautiful view of the city.</p>
+                <div class="flex justify-center">
+                  <button class="inline-flex text-black bg-red-300 border-0 py-2 px-6 focus:outline-none rounded text-lg" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;">Book Now</button>
+                </div>
+              </div>
+              <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                <img class="object-cover object-center rounded" alt="hero" src="{% static 'HotelManagement/images/delux_room.jpg' %}">
+              </div>
+            </div>
+          </section>
+          <hr>
+          <section class="text-gray-600 body-font">
+            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+              <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+                <img class="object-cover object-center rounded" alt="hero" src="{% static 'HotelManagement/images/luxury_room.jpg' %}">
+              </div>
+              <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900" style="font-family: 'Dancing Script', cursive; font-weight: 600;">Luxury Suite Bedroom
+                  <br class="hidden lg:inline-block">
+                </h1>
+                <p class="mb-8 leading-relaxed" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;">Arched corridors lit with elegant lamps will lead you to our fine luxury suites. Step into an experience in opulence. These spacious suites with a study, dining area, four-fixture bathroom and a lavish bedroom, offer fantastic views of the city – all foregrounded with the greenery of the hotel’s premises.</p>
+                <div class="flex justify-center">
+                  <button class="inline-flex text-black bg-red-300 border-0 py-2 px-6 focus:outline-none  rounded text-lg" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;">Book Now</button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <hr>
+          <section class="text-gray-600 body-font">
+            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+              <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900" style="font-family: 'Dancing Script', cursive; font-weight: 600;">Presidential Suite Bedroom
+                  <br class="hidden lg:inline-block">
+                </h1>
+                <p class="mb-8 leading-relaxed" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;">Situated at the top floor of the hotel, the Presidential Suite offers a breathtaking view of the city. It includes a cozy bedroom with a study-table. The ceiling of the bedroom is adorned with round lamps. The interiors are plush and the walls decorated with beautiful paintings.</p>
+                <div class="flex justify-center">
+                  <button class="inline-flex text-black bg-red-300 border-0 py-2 px-6 focus:outline-none  rounded text-lg" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;">Book Now</button>
+                </div>
+              </div>
+              <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                <img class="object-cover object-center rounded" alt="hero" src="{% static 'HotelManagement/images/presedential_room.jpg' %}">
+              </div>
+            </div>
+          </section>
+    </body>
+</html>

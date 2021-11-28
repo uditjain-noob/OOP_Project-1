@@ -118,3 +118,5 @@ def reg_result(request):
     # return render(request, 'HotelManagement/reg_result.html')
     return JsonResponse(responseData)
     
+def room(request):
+    return render(request, 'HotelManagement/room.html')
