@@ -1,3 +1,5 @@
+from os import curdir
+from sqlite3.dbapi2 import Cursor
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -26,6 +28,7 @@ def home(request):
     return render(request, 'HotelManagement/index.html')
 
 def login(request):
+    
     return render(request, 'HotelManagement/login.html')
 
 def register(request):  
@@ -119,4 +122,77 @@ def reg_result(request):
     return JsonResponse(responseData)
     
 def room(request):
-    return render(request, 'HotelManagement/room.html')
+    if request.method == "GET":
+        # GET USERNAME IS ACTUALLY EMAIL
+        email = request.GET.get('username', None)
+        password = request.GET.get('password', None)
+
+        # CONNECTING TO THE DB AND MODIFYING RETURN CONDITION
+        link = sqlite3.connect("db.sqlite3")
+        def list_factory(cursor, row):
+            lst = []
+            for idx, col in enumerate(cursor.description):
+                lst.append(row[idx])
+            return lst
+        link.row_factory = list_factory
+        cursor = link.cursor()
+
+
+        # CHECK IF USER IN DATABASE
+        with link:
+            cursor.execute("""
+            SELECT email FROM HotelManagement_user WHERE email LIKE :electmail""",{'electmail':email})
+
+            values = cursor.fetchone()
+            print(f"LINE 147 views.py {values}")
+            if values == [] or values == None:
+                # WHAT TO DO IF USER NOT FOUND
+                return render(request, 'HotelManagement/login.html')
+            if values[0] != email:
+                # WHAT TO DO IF INVALID EMAIL
+                return render(request, 'HotelManagement/login.html')
+            else:
+                # CHECK PASSWORD
+                cursor.execute("""
+                SELECT encrypt_pwd FROM HotelManagement_user WHERE email LIKE :electmail""",{'electmail':email})
+
+                psswrd = cursor.fetchone()
+                if psswrd != [] and psswrd != None:
+                    print(f"LINE 159 views.py {psswrd}")
+
+                    psswrd = psswrd[0]
+                    if psswrd == password:
+                        # -------------
+                        # CHECK IF USER HAS BOOKED A ROOM
+                        with link:
+                            cursor.execute("""
+                            SELECT rooms FROM HotelManagement_user where email LIKE :electmail""",{'electmail':email})
+
+                            roomBook = cursor.fetchone()
+                            # IF NOT BOOKED
+                            if roomBook != None and roomBook!= [] and roomBook[0] == "{}":
+                                # REDIRECT TO BOOKING ROOM
+                                return render(request, 'HotelManagement/room.html')
+                            else:
+                                # DO SOMETHING idk lmao
+                                # ALREADY BOOKED ROOM
+                                return render(request, 'HotelManagement/login.html')
+                
+                    else:
+                        # WHAT TO DO IF PASSWORD INCORRECT
+                        return render(request, 'HotelManagement/login.html')
+
+                else:
+                    # IF PASSWORD NOT FOUND
+                    return render(request, 'HotelManagement/login.html')
+            
+            
+
+       
+    else:
+        return render(request, 'HotelManagement/login.html')
+
+# def room(request):
+#     if request.method == "POST":
+#         username = request.POST.get('name', None)
+#         email = request.POST.get('email', None)

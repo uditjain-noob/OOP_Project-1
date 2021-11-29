@@ -12,15 +12,16 @@
 </head>
 <body>
     <div class="loginPageContent">
-        <form class="loginForm">
+        <form action="http://127.0.0.1:8000/book_room/" class="loginForm">
             <h3>Login Here</h3>
 
-            <label for="username">Username</label>
-            <input type="text" placeholder="Email" id="username">
+            <label for="username">Email</label>
+            <input type="text" placeholder="Email" id="username" name = "username">
 
             <label for="password">Password</label>
-            <input type="password" placeholder="Password" id="password">
+            <input type="password" placeholder="Password" id="password" name = "password">
 
+            
             <button>Log In</button>
             <div class="social">
                 <div class="register"><a href="http://127.0.0.1:8000/register/">Register</a></div>
