@@ -1,4 +1,4 @@
-# IDK WHAT THE IMPORTS ARE LMAO
+# IDK WHAT THE IMPORTS ARE
 from os import curdir
 from sqlite3.dbapi2 import Cursor
 from django.http.response import JsonResponse

@@ -9,20 +9,8 @@ from string import ascii_lowercase, ascii_uppercase, digits
 from random import choices
 from .models import User, Room, Schedule    
 import sqlite3
-
 import HotelManagement
-# Create your views here.
-# global arr
-# arr = {
-#     "Name" : None,
-#     "Email" : None,
-#     "phone_num" : None,
-#     "PWD": None,
-#     "rooms": None,
-#     "checkin": None,
-#     "checkout":None,
-#     "verification_code": None
-# }
+
 
 def home(request):
     return render(request, 'HotelManagement/index.html')
@@ -103,7 +91,7 @@ def reg_result(request):
             if email in email_list:
 
                 responseData = {
-                'message' : 'Email already in use'
+                    'message' : 'Email already in use'
                 }
                 
             else:
@@ -122,10 +110,10 @@ def reg_result(request):
     return JsonResponse(responseData)
     
 def room(request):
-    if request.method == "GET":
+    if request.method == "POST":
         # GET USERNAME IS ACTUALLY EMAIL
-        email = request.GET.get('username', None)
-        password = request.GET.get('password', None)
+        email = request.POST.get('username', None)
+        password = request.POST.get('password', None)
 
         # CONNECTING TO THE DB AND MODIFYING RETURN CONDITION
         link = sqlite3.connect("db.sqlite3")
@@ -192,7 +180,3 @@ def room(request):
     else:
         return render(request, 'HotelManagement/login.html')
 
-# def room(request):
-#     if request.method == "POST":
-#         username = request.POST.get('name', None)
-#         email = request.POST.get('email', None)
