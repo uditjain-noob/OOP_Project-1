@@ -11,8 +11,8 @@
 
 </head>
 <body>
-    <div class="loginPageContent">
-        <form action="http://127.0.0.1:8000/book_room/" class="loginForm">
+    <div class="loginPageContent"> 
+        <form action="http://127.0.0.1:8000/book_room/" method="post" class="loginForm"> {% csrf_token %}
             <h3>Login Here</h3>
 
             <label for="username">Email</label>
