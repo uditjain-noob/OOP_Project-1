@@ -180,3 +180,6 @@ def room(request):
     else:
         return render(request, 'HotelManagement/login.html')
 
+def room_list(request):
+    return render(request, 'HotelManagement/room_list.html')
+
