@@ -44,22 +44,13 @@ body {
 }
 
 .dateRange {
+    margin: 10px 5px;
     display: flex;
-}
-
-.dateRange .from,
-.dateRange .to {
-    margin: 20px 10px;
-}
-
-.dateRange .from {
-    margin-left: 0px;
 }
 
 .dateRange input {
     padding: 10px;
     align-items: center;
-    background-color: antiquewhite;
 }
 
 #from_date {
@@ -69,20 +60,3 @@ body {
 #to_date {
     border-radius: 5px;
 }
-
-#deluxe_quant,
-#luxury_quant,
-#presidential_quant {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    background-color: wheat;
-    margin-right: 20px;
-    border-radius: 5px;
-    padding: 0px 10px 0px 10px;
-    transition: background-color 0.5s ease-in-out;
-}
-
-/* #deluxe_quant,
-#luxury_quant,
-#presidential_quant:hover {
-    background-color: wheat;
-} */

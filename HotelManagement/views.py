@@ -1,7 +1,7 @@
 from os import curdir
 from sqlite3.dbapi2 import Cursor
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.mail import send_mail
 import requests
@@ -115,6 +115,10 @@ def room(request):
         email = request.POST.get('username', None)
         password = request.POST.get('password', None)
 
+        context_content = {
+            "email" : email
+        }
+
         # CONNECTING TO THE DB AND MODIFYING RETURN CONDITION
         link = sqlite3.connect("db.sqlite3")
         def list_factory(cursor, row):
@@ -160,7 +164,7 @@ def room(request):
                             # IF NOT BOOKED
                             if roomBook != None and roomBook!= [] and roomBook[0] == "{}":
                                 # REDIRECT TO BOOKING ROOM
-                                return render(request, 'HotelManagement/room.html')
+                                return render(request, 'HotelManagement/room.html', context_content)
                             else:
                                 # DO SOMETHING idk lmao
                                 # ALREADY BOOKED ROOM
@@ -181,5 +185,6 @@ def room(request):
         return render(request, 'HotelManagement/login.html')
 
 def room_list(request):
+
     return render(request, 'HotelManagement/room_list.html')
 
