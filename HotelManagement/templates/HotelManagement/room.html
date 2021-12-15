@@ -119,7 +119,7 @@
 
               $.ajax(
                     {
-                        url: '/reg_result/',
+                        url: '/room_list/',
                         data: {
                             'email' : '{{ email }}',
                             'fromDate': FromDate,
@@ -128,7 +128,7 @@
                         },
                         dataType: 'json',
                         success: function(responseData){
-                            alert(responseData.message);
+                            window.location('');
                         }
                     }
                 )
