@@ -42,3 +42,21 @@ body {
     background-color: antiquewhite;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
+
+.dateRange {
+    margin: 10px 5px;
+    display: flex;
+}
+
+.dateRange input {
+    padding: 10px;
+    align-items: center;
+}
+
+#from_date {
+    border-radius: 5px;
+}
+
+#to_date {
+    border-radius: 5px;
+}
