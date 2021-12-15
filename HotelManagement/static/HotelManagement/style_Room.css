@@ -49,6 +49,8 @@ body {
 
 .dateRange .from,
 .dateRange .to {
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 600;
     margin: 20px 10px;
 }
 
@@ -86,5 +88,3 @@ body {
 #presidential_quant:hover {
     background-color: wheat;
 } */
-
-
