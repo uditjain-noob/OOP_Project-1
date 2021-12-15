@@ -185,6 +185,8 @@ def room(request):
         return render(request, 'HotelManagement/login.html')
 
 def room_list(request):
-
     return render(request, 'HotelManagement/room_list.html')
+
+def user_profile(request):
+    return render(request, 'HotelManagement/user_profile.html')
 
