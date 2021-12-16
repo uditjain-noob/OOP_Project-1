@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "HotelTesting",
+            "database": "${workspaceFolder:OOP_Project}/db.sqlite3",
+            "group": "Something"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

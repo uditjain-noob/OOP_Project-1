@@ -9,8 +9,11 @@ from string import ascii_lowercase, ascii_uppercase, digits
 from random import choices
 from .models import User, Room, Schedule    
 import sqlite3
-import HotelManagement
+from HotelManagement import booking
 
+import HotelManagement
+# from booking import *      # Booking File Import for DB Functions
+#-------------------------------------
 
 def home(request):
     return render(request, 'HotelManagement/index.html')
@@ -193,12 +196,12 @@ def room_params(request):
         number_luxury = request.GET.get('number_luxury', None)
         number_presidential = request.GET.get('number_presidential', None)
 
-        request.session['email'] = email
-        request.session['fromDate'] = fromDate
-        request.session['toDate'] = toDate
-        request.session['number_deluxe'] = number_deluxe
-        request.session['number_luxury'] = number_luxury
-        request.session['number_presidential'] = number_presidential
+        request.session['email']                = email
+        request.session['fromDate']             = fromDate
+        request.session['toDate']               = toDate
+        request.session['number_deluxe']        = number_deluxe
+        request.session['number_luxury']        = number_luxury
+        request.session['number_presidential']  = number_presidential
 
         # print(request.session['email'])
 
@@ -213,6 +216,12 @@ def room_params(request):
 def room_list(request):
     email = request.session['email']
     
+    # This is to be run everytime the server is accessed.
+    booking.LiveUpdate()
+
+    # Make the Booking and Return the Booked Rooms
+    booking.bookRoom(request)
+    # IF not avaiable give an error message
     return render(request, 'HotelManagement/room_list.html')
 
 def user_profile(request):
