@@ -196,6 +196,17 @@ def room_params(request):
         number_luxury = request.GET.get('number_luxury', None)
         number_presidential = request.GET.get('number_presidential', None)
 
+        print(type(number_luxury))
+        # nigga koad ignor
+        if number_deluxe == "":
+            number_deluxe = 0
+        
+        if number_luxury == "":
+            number_luxury = 0
+        
+        if number_presidential == "":
+            number_presidential = 0
+
         db = sqlite3.connect('db.sqlite3', check_same_thread=False)
         cursor = db.cursor()
         with db:
@@ -240,7 +251,14 @@ def room_list(request):
         'listRooms' : listRooms,
         'email' : email,
         'fromDate' :  request.session['fromDate'],
-        'toDate' : request.session['toDate']
+        'toDate' : request.session['toDate'],
+        'deluxeQuantity' : int(request.session['number_deluxe']),
+        'deluxePrice' : 1000 * int(request.session['number_deluxe']),
+        'luxuryQuantity' : int(request.session['number_luxury']),
+        'luxuryPrice' : 3000 * int(request.session['number_luxury']),
+        'presidentialQuantity' : int(request.session['number_presidential']),
+        'presidentialPrice' : 7000 * int(request.session['number_presidential']),
+        'totalPrice' : 1000 * int(request.session['number_deluxe']) + 3000 * int(request.session['number_luxury']) + 7000 * int(request.session['number_presidential'])
     }
     # IF not avaiable give an error message
     return render(request, 'HotelManagement/room_list.html', context = context_data)

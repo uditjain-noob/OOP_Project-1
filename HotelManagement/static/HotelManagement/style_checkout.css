@@ -1,0 +1,66 @@
+body {
+    background: -webkit-linear-gradient(top, wheat, antiquewhite);
+    font-family: 'Varela Round', sans-serif;
+    height: 760px;
+}
+
+#homeBtn a {
+    margin-left: 20px;
+    font-size: 20px !important;
+    text-decoration: none;
+    position: relative;
+}
+
+#homeBtn a:before {
+    content: "a";
+    position: absolute;
+    margin-top: 33px;
+    left: 0%;
+    background-color: black;
+    width: 0%;
+    height: 2px;
+    font-size: 0px;
+    transition: all 0.5s ease;
+}
+
+#homeBtn a:hover:before {
+    width: 100%;
+}
+
+#verifyModal {
+    background-color: white;
+    border-radius: 15px;
+    /* justify-content: center;
+    align-items: center; */
+    /* width: 600px; */
+}
+
+#pageHeader {
+    text-decoration: underline;
+}
+
+#payBtn button {
+    margin: auto;
+    margin-bottom: 20px;
+    font-size: 20px;
+    /* background-color: rgb(252 165 165); */
+    background-color: #90EE90;
+    color: black !important;
+    /* align-items: center; */
+}
+
+.gaeyourmom td {
+    font-weight: 600;
+}
+
+#rohit {
+    font-size: 20px;
+}
+
+#verifyportal {
+    height: 700px;
+}
+
+/* .roomTypes {
+    padding: 20px;
+} */
