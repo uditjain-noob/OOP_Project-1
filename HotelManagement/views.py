@@ -11,6 +11,9 @@ from .models import User, Room, Schedule
 import sqlite3
 import HotelManagement
 
+# Booking File Import for DB Functions
+import booking
+#-------------------------------------
 
 def home(request):
     return render(request, 'HotelManagement/index.html')
@@ -193,12 +196,12 @@ def room_params(request):
         number_luxury = request.GET.get('number_luxury', None)
         number_presidential = request.GET.get('number_presidential', None)
 
-        request.session['email'] = email
-        request.session['fromDate'] = fromDate
-        request.session['toDate'] = toDate
-        request.session['number_deluxe'] = number_deluxe
-        request.session['number_luxury'] = number_luxury
-        request.session['number_presidential'] = number_presidential
+        request.session['email']                = email
+        request.session['fromDate']             = fromDate
+        request.session['toDate']               = toDate
+        request.session['number_deluxe']        = number_deluxe
+        request.session['number_luxury']        = number_luxury
+        request.session['number_presidential']  = number_presidential
 
         # print(request.session['email'])
 
@@ -211,6 +214,12 @@ def room_params(request):
         return JsonResponse(responseData)
 
 def room_list(request):
+    # This is to be run everytime the server is accessed.
+    booking.LiveUpdate()
+
+    # Make the Booking and Return the Booked Rooms
+    booking.bookRoom()
+    # IF not avaiable give an error message
     return render(request, 'HotelManagement/room_list.html')
 
 def user_profile(request):

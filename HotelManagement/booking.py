@@ -6,9 +6,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
 import requests
-from string import ascii_lowercase, ascii_uppercase, digits
-from random import choices
-
 from HotelManagement.views import room
 from .models import User, Room, Schedule    
 import sqlite3
@@ -29,39 +26,52 @@ def bookRoom(request):
     # else get me the customer name/email/id somehow
     if request.method == "GET":
         # GET USERNAME IS ACTUALLY EMAIL
-        email = request.GET.get('username', None)
-        rooms = 3
-        room_type = "Deluxe"
-        start_date = datetime.date.today()
-        end_date = datetime.date.today()
+        # email = request.GET.get('username', None)
+        # rooms = 3
+        # room_type = "Deluxe"
+        # start_date = datetime.date.today()
+        # end_date = datetime.date.today()
+        email       = request.session['email']
+        start_date  = request.session['fromDate']
+        end_date    = request.session['toDate']
+        # room_types = ["Deluxe","Luxury","Presidential"]
+        room_types =  [[request.session['number_deluxe'],"Deluxe"],
+                            [request.session['number_luxury'],"Luxury"],
+                            [request.session['number_presidential'],"Presidential"]]
         cursor.execute("""
                         SELECT id 
                         FROM HotelManagement_room 
                         WHERE email = :mail""", {'mail':email})
         user_id = cursor.fetchall()
+
+        # IF a user exists:
         if user_id != None and user_id != []:
             user_id = user_id[0]
-            cursor.execute(""" SELECT room_id,end_date FROM HotelManagement_room
-                               WHERE room_type = :suite AND
-                               is_empty = :condition
-                               LIMIT :limit;""",{'suite':room_type,'condition':True,'limit':rooms})
+            for pair in room_types:
+                rooms = pair[0]
+                room_type = pair[1]
+                cursor.execute(""" SELECT room_id,end_date FROM HotelManagement_room
+                                WHERE room_type = :suite AND
+                                is_empty = :condition
+                                LIMIT :limit;""",{'suite':room_type,'condition':True,'limit':rooms})
 
-            availableRooms = cursor.fetchall()
-            if availableRooms != None and availableRooms != [] and len(availableRooms) == rooms:
-                for room,date in availableRooms:
-                    cursor.execute("""
-                                    SELECT end_date FROM HotelManagement_schedule
-                                    WHERE room_booked = :id ORDER BY end_date DESC LIMIT 1;""",{'id':room})
-                    roomExist = cursor.fetchall()
-                    if roomExist == [] or roomExist[0] < end_date:
-                    # START BOOKING ROOMS
-                        with link:
-                            cursor.execute("""
-                                            INSERT INTO HotelManagement_schedule 
-                                            (customer_id,start_date,end_date,room_booked,room_type)
-                                            VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
-                                            ,{'id':user_id,'s_date':str(start_date),'e_date':str(end_date),
-                                            'room_no':room,'r_type':room_type})
+                availableRooms = cursor.fetchall()
+                # If a room of given category is available
+                if availableRooms != None and availableRooms != [] and len(availableRooms) == rooms:
+                    for room,date in availableRooms:
+                        cursor.execute("""
+                                        SELECT end_date FROM HotelManagement_schedule
+                                        WHERE room_booked = :id ORDER BY end_date DESC LIMIT 1;""",{'id':room})
+                        roomExist = cursor.fetchall()
+                        if roomExist == [] or roomExist[0] < end_date:
+                        # START BOOKING ROOMS
+                            with link:
+                                cursor.execute("""
+                                                INSERT INTO HotelManagement_schedule 
+                                                (customer_id,start_date,end_date,room_booked,room_type)
+                                                VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
+                                                ,{'id':user_id,'s_date':str(start_date),'e_date':str(end_date),
+                                                'room_no':room,'r_type':room_type})
 
 # ------------------------------------------------------------
 def LiveUpdate():
