@@ -196,6 +196,19 @@ def room_params(request):
         number_luxury = request.GET.get('number_luxury', None)
         number_presidential = request.GET.get('number_presidential', None)
 
+        db = sqlite3.connect('db.sqlite3', check_same_thread=False)
+        cursor = db.cursor()
+        with db:
+            cursor.execute(f"""
+                SELECT name FROM HotelManagement_user
+                WHERE email = "{email}";
+            """)
+
+            name = cursor.fetchone()[0]
+
+        # print(name)
+
+        request.session['name']                 = name
         request.session['email']                = email
         request.session['fromDate']             = fromDate
         request.session['toDate']               = toDate
@@ -221,8 +234,16 @@ def room_list(request):
 
     # Make the Booking and Return the Booked Rooms
     listRooms = booking.bookRoom(request)
+
+    context_data = {
+        'name' : request.session['name'],
+        'listRooms' : listRooms,
+        'email' : email,
+        'fromDate' :  request.session['fromDate'],
+        'toDate' : request.session['toDate']
+    }
     # IF not avaiable give an error message
-    return render(request, 'HotelManagement/room_list.html')
+    return render(request, 'HotelManagement/room_list.html', context = context_data)
 
 def user_profile(request):
     return render(request, 'HotelManagement/user_profile.html')
