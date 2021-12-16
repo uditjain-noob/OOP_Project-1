@@ -10,5 +10,6 @@ urlpatterns = [
     path('reg_result/', views.reg_result, name="reg_result"),
     path('book_room/', views.room, name="book_room"),
     path('room_list/', views.room_list, name="room_list"),
+    path('room_params/', views.room_params, name="room_params"),
     path('user_profile/', views.user_profile, name="user_profile")
 ]

@@ -80,7 +80,7 @@
                 <div class="flex justify-center">
                   <!-- <input type="date"> -->
                   <input type="number" min="0" max="10" id="luxury_quant" placeholder="Rooms">
-                  <button class="inline-flex text-black bg-red-300 border-0 py-2 px-6 focus:outline-none  rounded text-lg" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;" onclick="onclick_luxury()">Book Now</button>
+                  <button class="inline-flex text-black bg-red-300 border-0 py-2 px-6 focus:outline-none  rounded text-lg" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;" onclick="onclick_deluxe()">Book Now</button>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@
                   <!-- from: <input type="date">
                   to: <input type="date"> -->
                   <input type="number" min="0" max="10" id="presidential_quant" placeholder="Rooms">
-                  <button class="inline-flex text-black bg-red-300 border-0 py-2 px-6 focus:outline-none  rounded text-lg" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;" onclick="onclick_presidential()">Book Now</button>
+                  <button class="inline-flex text-black bg-red-300 border-0 py-2 px-6 focus:outline-none  rounded text-lg" style="font-family: 'Varela Round', sans-serif; font-weight: 500; font-size: 18px;" onclick="onclick_deluxe()">Book Now</button>
                 </div>
               </div>
               <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
@@ -114,49 +114,37 @@
               // console.log("hellooo");
               FromDate = document.getElementById("from_date").value;
               ToDate = document.getElementById("to_date").value;
-              quantity = document.getElementById("delux_quant").value;
+              quantity_deluxe = document.getElementById("delux_quant").value;
+              quantity_luxury = document.getElementById('luxury_quant').value;
+              quantity_presidential = document.getElementById('presidential_quant').value;
               console.log(FromDate);
               console.log(ToDate);
-              console.log(quantity);
+              console.log(quantity_deluxe);
+              console.log(quantity_luxury);
+              console.log(quantity_presidential);
               console.log('{{ email }}');
 
               $.ajax(
-                    {
-                        url: '/room_list/',
+                      {
+                        url: '/room_params/',
                         data: {
                             'email' : '{{ email }}',
                             'fromDate': FromDate,
                             'toDate': ToDate,
-                            'number': quantity 
+                            'number_deluxe': quantity_deluxe,
+                            'number_luxury': quantity_luxury,
+                            'number_presidential': quantity_presidential
                         },
                         dataType: 'json',
                         success: function(responseData){
-                            window.location('');
+                            // alert(responseData.url);
+                            window.location.replace("http://127.0.0.1:8000/room_list/");
+                            // http://127.0.0.1:8000/book_room/
                         }
-                    }
-                )
-            }
+                      }
 
-            function onclick_luxury()
-            {
-              FromDate = document.getElementById("from_date").value;
-              ToDate = document.getElementById("to_date").value;
-              quantity = document.getElementById("luxury_quant").value;
-              console.log(FromDate);
-              console.log(ToDate);
-              console.log(quantity);
-              console.log('{{ email }}');
-            }
+                    )
 
-            function onclick_presidential()
-            {
-              FromDate = document.getElementById("from_date").value;
-              ToDate = document.getElementById("to_date").value;
-              quantity = document.getElementById("presidential_quant").value;
-              console.log(FromDate);
-              console.log(ToDate);
-              console.log(quantity);
-              console.log('{{ email }}');
             }
           </script>
     </body>

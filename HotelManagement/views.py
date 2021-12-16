@@ -184,6 +184,32 @@ def room(request):
     else:
         return render(request, 'HotelManagement/login.html')
 
+def room_params(request):
+    if request.method == "GET":
+        email = request.GET.get('email', None)
+        fromDate = request.GET.get('fromDate', None)
+        toDate = request.GET.get('toDate', None)
+        number_deluxe = request.GET.get('number_deluxe', None)
+        number_luxury = request.GET.get('number_luxury', None)
+        number_presidential = request.GET.get('number_presidential', None)
+
+        request.session['email'] = email
+        request.session['fromDate'] = fromDate
+        request.session['toDate'] = toDate
+        request.session['number_deluxe'] = number_deluxe
+        request.session['number_luxury'] = number_luxury
+        request.session['number_presidential'] = number_presidential
+
+        # print(request.session['email'])
+
+        # print(email, fromDate, toDate, number_deluxe, number_luxury, number_presidential)
+        # return render(request, 'HotelManagement/room_list.html')
+
+        responseData = {
+            'url' : 'some url'
+        }
+        return JsonResponse(responseData)
+
 def room_list(request):
     return render(request, 'HotelManagement/room_list.html')
 
