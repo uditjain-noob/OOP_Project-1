@@ -9,10 +9,10 @@ from string import ascii_lowercase, ascii_uppercase, digits
 from random import choices
 from .models import User, Room, Schedule    
 import sqlite3
-import HotelManagement
+from HotelManagement import booking
 
-# Booking File Import for DB Functions
-import booking
+import HotelManagement
+# from booking import *      # Booking File Import for DB Functions
 #-------------------------------------
 
 def home(request):
@@ -218,7 +218,7 @@ def room_list(request):
     booking.LiveUpdate()
 
     # Make the Booking and Return the Booked Rooms
-    booking.bookRoom()
+    booking.bookRoom(request)
     # IF not avaiable give an error message
     return render(request, 'HotelManagement/room_list.html')
 
