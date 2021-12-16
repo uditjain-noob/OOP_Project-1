@@ -214,6 +214,8 @@ def room_params(request):
         return JsonResponse(responseData)
 
 def room_list(request):
+    email = request.session['email']
+    
     # This is to be run everytime the server is accessed.
     booking.LiveUpdate()
 
