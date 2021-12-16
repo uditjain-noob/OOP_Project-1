@@ -105,13 +105,15 @@ def bookRoom(request):
 
                             if toggle == 1:
                                 total_booked += 1
-                                with link:
-                                    cursor.execute("""
-                                                    INSERT INTO HotelManagement_schedule 
-                                                    (customer_id,start_date,end_date,room_booked,room_type)
-                                                    VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
-                                                    ,{'id':user_id,'s_date':str(start_date),'e_date':str(end_date),
-                                                    'room_no':room,'r_type':room_type})
+                            #     with link:
+                            #         cursor.execute("""
+                            #                         INSERT INTO HotelManagement_schedule 
+                            #                         (customer_id,start_date,end_date,room_booked,room_type)
+                            #                         VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
+                            #                         ,{'id':user_id,'s_date':str(start_date),'e_date':str(end_date),
+                            #                         'room_no':room,'r_type':room_type})
+
+
         print("ROOMS BOOKED->",rooms_booked)
         return rooms_booked
     return None
