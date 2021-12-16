@@ -1,4 +1,5 @@
 # IDK WHAT THE IMPORTS ARE
+from abc import abstractclassmethod
 from math import perm
 from os import curdir
 from sqlite3.dbapi2 import Cursor
@@ -47,16 +48,23 @@ def bookRoom(request):
 
         # IF a user exists:
         if user_id != None and user_id != []:
-            user_id = user_id[0][0] #Double Nested ID god damn
+            user_id = user_id[0][0]         #Double Nested ID god damn
 
             for pair in room_types:
+                print(type(pair[0]))
                 rooms = int(pair[0])        #This was a string bruh
                 room_type = pair[1]
+
+                # WHY was i doing this?
+                # To get least minimum rooms to satisfy
+                # NOW take ALL and make life easier           
                 cursor.execute(""" SELECT room_id,end_date FROM HotelManagement_room
                                 WHERE room_type = :suite AND
                                 is_empty = 1
-                                LIMIT :limit;""",{'suite':room_type,'limit':rooms})
+                                LIMIT :limit;""",{'suite':room_type,'limit':100}) #'limit':rooms
+
                 availableRooms = cursor.fetchall()
+
                 final_list = []
                 if availableRooms != []:
                     for myRoom,myDate in availableRooms:
@@ -64,36 +72,46 @@ def bookRoom(request):
                             myDate = datetime.date(2000,1,1)
                         final_list.append([myRoom,myDate])
 
-                # print("Available Rooms", availableRooms)
-                # print(len(availableRooms),type(rooms))
-                # print(final_list)
-
                 # If a room of given category is available
-                if availableRooms != None \
-                    and availableRooms != [] \
-                    and len(availableRooms) == rooms:
-
+                if availableRooms != None and availableRooms != [] and len(availableRooms) >= rooms:
+                    total_booked = 0
                     for room,date in final_list:
-                        cursor.execute("""
-                                        SELECT end_date FROM HotelManagement_schedule
-                                        WHERE room_booked = :id ORDER BY end_date DESC LIMIT 1;""",{'id':room})
-                        roomExist = cursor.fetchall()
-                        print("Room Exist-", roomExist)
-                        print(roomExist[0][0])
-                        # if roomExist != []:
-                            # roomExist[0][0]
-                        if roomExist == [] or roomExist[0][0] < end_date_str:   #See if comparision is correct
-                            rooms_booked.append([room,room_type])
-                        # START BOOKING ROOMS
-                            with link:
-                                cursor.execute("""
-                                                INSERT INTO HotelManagement_schedule 
-                                                (customer_id,start_date,end_date,room_booked,room_type)
-                                                VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
-                                                ,{'id':user_id,'s_date':str(start_date),'e_date':str(end_date),
-                                                'room_no':room,'r_type':room_type})
-        print("XXXXXXXXX",rooms_booked)
+                        print("GOT HERE!")
+                        print(total_booked, rooms)
+                        if total_booked < rooms:
+                            toggle = 0
+                            cursor.execute("""
+                                            SELECT end_date FROM HotelManagement_schedule
+                                            WHERE room_booked = :id ORDER BY end_date DESC LIMIT 1;""",{'id':room})
+                            roomExist = cursor.fetchall()
 
+                            if roomExist == [] or roomExist[0][0] < end_date_str:   #See if comparision is correct
+                                rooms_booked.append([room,room_type])
+                                toggle = 1
+                                # START BOOKING ROOMS
+                            else:
+                                cursor.execute("""
+                                            SELECT start_date,end_date FROM HotelManagement_schedule
+                                            WHERE room_booked = :id ORDER BY end_date DESC;""",{'id':room})
+                                checkList = cursor.fetchall()
+                                print("YOOOOOOOOOOOOOOOOOOO",checkList)
+                                if checkList != []:
+                                    for indx in range(len(checkList)-1):
+                                        if checkList[indx][1] < start_date_str and end_date_str < checkList[indx+1][0]:
+                                            toggle = 1
+
+                            if toggle == 1:
+                                total_booked += 1
+                                with link:
+                                    cursor.execute("""
+                                                    INSERT INTO HotelManagement_schedule 
+                                                    (customer_id,start_date,end_date,room_booked,room_type)
+                                                    VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
+                                                    ,{'id':user_id,'s_date':str(start_date),'e_date':str(end_date),
+                                                    'room_no':room,'r_type':room_type})
+        print("ROOMS BOOKED->",rooms_booked)
+        return rooms_booked
+    return None
 # ------------------------------------------------------------
 def LiveUpdate():
     today = datetime.date.today()
