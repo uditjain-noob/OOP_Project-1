@@ -218,7 +218,7 @@ def room_list(request):
     booking.LiveUpdate()
 
     # Make the Booking and Return the Booked Rooms
-    booking.bookRoom(request)
+    listRooms = booking.bookRoom(request)
     # IF not avaiable give an error message
     return render(request, 'HotelManagement/room_list.html')
 

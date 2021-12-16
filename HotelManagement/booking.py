@@ -51,8 +51,11 @@ def bookRoom(request):
             user_id = user_id[0][0]         #Double Nested ID god damn
 
             for pair in room_types:
-                print(type(pair[0]))
-                rooms = int(pair[0])        #This was a string bruh
+                # print(type(pair[0]))
+                if pair[0] == '':
+                    rooms = 0
+                else:
+                    rooms = int(pair[0])        #This was a string bruh
                 room_type = pair[1]
 
                 # WHY was i doing this?
@@ -76,8 +79,8 @@ def bookRoom(request):
                 if availableRooms != None and availableRooms != [] and len(availableRooms) >= rooms:
                     total_booked = 0
                     for room,date in final_list:
-                        print("GOT HERE!")
-                        print(total_booked, rooms)
+                        # print("GOT HERE!")
+                        # print(total_booked, rooms)
                         if total_booked < rooms:
                             toggle = 0
                             cursor.execute("""
@@ -94,7 +97,7 @@ def bookRoom(request):
                                             SELECT start_date,end_date FROM HotelManagement_schedule
                                             WHERE room_booked = :id ORDER BY end_date DESC;""",{'id':room})
                                 checkList = cursor.fetchall()
-                                print("YOOOOOOOOOOOOOOOOOOO",checkList)
+                                # print("YOOOOOOOOOOOOOOOOOOO",checkList)
                                 if checkList != []:
                                     for indx in range(len(checkList)-1):
                                         if checkList[indx][1] < start_date_str and end_date_str < checkList[indx+1][0]:
@@ -112,7 +115,7 @@ def bookRoom(request):
         print("ROOMS BOOKED->",rooms_booked)
         return rooms_booked
     return None
-# ------------------------------------------------------------
+# -------------------------------------------------------------
 def LiveUpdate():
     today = datetime.date.today()
     #FLUSHING OUT OLD USERS
