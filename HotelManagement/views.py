@@ -11,6 +11,11 @@ from .models import User, Room, Schedule
 import sqlite3
 from HotelManagement import booking
 
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+import io
+
 import HotelManagement
 # from booking import *      # Booking File Import for DB Functions
 #-------------------------------------
@@ -262,6 +267,19 @@ def room_list(request):
     }
     # IF not avaiable give an error message
     return render(request, 'HotelManagement/room_list.html', context = context_data)
+
+def commit_db(request):
+    if request.method == "GET":
+        name = request.GET.get('name', None)
+        email = request.GET.get('email', None)
+        fromDate = request.GET.get('fromDate', None)
+        toDate = request.GET.get('toDate', None)
+        # toDate = request.GET.get('toDate', None)
+        listRooms = request.GET.get('listRooms', None)
+
+        
+
+    return
 
 def user_profile(request):
     return render(request, 'HotelManagement/user_profile.html')
