@@ -184,3 +184,9 @@ def updateAllTables(email,fromDate,toDate,room_list):
                                 UPDATE HotelManagement_user
                                 SET rooms = :allRooms
                                 WHERE id = :user_id""",{'rooms':allrooms,'id':user_id})
+
+            # with link:
+            #     cursor.execute(f"""
+            #                     UPDATE HotelManagement_user
+            #                     SET rooms = {allrooms}
+            #                     WHERE id = {user_id}""")
