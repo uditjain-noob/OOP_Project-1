@@ -277,8 +277,9 @@ def commit_db(request):
         # toDate = request.GET.get('toDate', None)
         listRooms = request.GET.get('listRooms', None)
 
-        
-
+        # Making the function there due to sqlite specific commands given there
+        # and here have different parameters, return type etc.
+        booking.updateAllTables(name,email,fromDate,toDate,listRooms)
     return
 
 def user_profile(request):

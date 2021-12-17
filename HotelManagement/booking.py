@@ -105,13 +105,7 @@ def bookRoom(request):
 
                             if toggle == 1:
                                 total_booked += 1
-                            #     with link:
-                            #         cursor.execute("""
-                            #                         INSERT INTO HotelManagement_schedule 
-                            #                         (customer_id,start_date,end_date,room_booked,room_type)
-                            #                         VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
-                            #                         ,{'id':user_id,'s_date':str(start_date),'e_date':str(end_date),
-                            #                         'room_no':room,'r_type':room_type})
+                            
 
 
         print("ROOMS BOOKED->",rooms_booked)
@@ -152,3 +146,38 @@ def LiveUpdate():
                         room_type   = {entry[5]};
             """)
 #--------------------------------------------------------------------
+
+def updateAllTables(name,email,fromDate,toDate,room_list):
+
+    cursor.execute("""
+                        SELECT id 
+                        FROM HotelManagement_user
+                        WHERE email = :mail""", {'mail':email})
+    user_id = cursor.fetchall()
+
+        # IF a user exists:
+    if user_id != None and user_id != []:
+        user_id = user_id[0][0]         #Double Nested ID
+        if len(room_list) > 0:
+            for room_id,room_type in room_list:
+                with link:
+                    cursor.execute("""
+                                    INSERT INTO HotelManagement_schedule 
+                                    (customer_id,start_date,end_date,room_booked,room_type)
+                                    VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
+                                    ,{'id':user_id,'s_date':str(fromDate),'e_date':str(toDate),
+                                    'room_no':room_id,'r_type':room_type})
+        
+        room_types = ["Deluxe","Luxury","Presidential"]
+        allrooms = ''
+        for room_id,room_type in room_list:
+            for room in room_types:
+                if room in room_type:
+                    allrooms = allrooms + room + " "
+            with link:
+                cursor.execute("""
+                                UPDATE HotelManagement_user
+                                SET rooms = :allRooms
+                                WHERE id = :user_id""",{'rooms':allrooms,'id':user_id})
+        
+        
