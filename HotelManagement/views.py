@@ -270,6 +270,7 @@ def room_list(request):
 
 def commit_db(request):
     if request.method == "GET":
+        print("helloooo")
         name = request.GET.get('name', None)
         email = request.GET.get('email', None)
         fromDate = request.GET.get('fromDate', None)
@@ -280,7 +281,14 @@ def commit_db(request):
         # Making the function there due to sqlite specific commands given there
         # and here have different parameters, return type etc.
         booking.updateAllTables(name,email,fromDate,toDate,listRooms)
-    return
+    # return
+        print(name, email, fromDate, toDate, listRooms)
+
+        responseData = {
+            'sucsess' : 1
+        }
+
+    return JsonResponse(responseData)
 
 def user_profile(request):
     return render(request, 'HotelManagement/user_profile.html')
