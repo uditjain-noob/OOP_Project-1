@@ -10,6 +10,8 @@ from random import choices
 from .models import User, Room, Schedule    
 import sqlite3
 from HotelManagement import booking
+import json
+import ast
 
 # from reportlab.pdfgen import canvas
 # from reportlab.lib.units import inch
@@ -162,6 +164,8 @@ def room(request):
 
                     psswrd = psswrd[0]
                     if psswrd == password:
+
+                        request.session['loggedInEmail'] = email
                         # -------------
                         # CHECK IF USER HAS BOOKED A ROOM
                         with link:
@@ -250,7 +254,7 @@ def room_list(request):
 
     # Make the Booking and Return the Booked Rooms
     listRooms = booking.bookRoom(request)
-
+    request.session['listRooms'] = listRooms
     context_data = {
         'name' : request.session['name'],
         'listRooms' : listRooms,
@@ -277,19 +281,40 @@ def commit_db(request):
         toDate = request.GET.get('toDate', None)
         # toDate = request.GET.get('toDate', None)
         listRooms = request.GET.get('listRooms', None)
+        # listRooms = str(listRooms)
+        # listRooms = listRooms.decode()
+        listRooms = request.session['listRooms']
 
+        print(name, email, fromDate, toDate, listRooms, type(listRooms))
         # Making the function there due to sqlite specific commands given there
         # and here have different parameters, return type etc.
         booking.updateAllTables(email,fromDate,toDate,listRooms)
         # return
-        print(name, email, fromDate, toDate, listRooms)
+
 
         responseData = {
-            'sucsess' : 1
+            'success' : '1'
         }
 
     return JsonResponse(responseData)
 
 def user_profile(request):
-    return render(request, 'HotelManagement/user_profile.html')
+
+    email = request.session['loggedInEmail']
+
+    db = sqlite3.connect('db.sqlite3', check_same_thread=False)
+    cursor = db.cursor()
+    with db:
+        cursor.execute(f"""
+                    SELECT name FROM HotelManagement_user
+                    WHERE email = "{email}";
+                """)
+
+        name = cursor.fetchone()[0]
+
+    context_data = {
+        'email' : email,
+        'name' : name,
+            }
+    return render(request, 'HotelManagement/user_profile.html', context=context_data)
 
