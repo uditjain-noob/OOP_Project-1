@@ -270,6 +270,7 @@ def room_list(request):
 
 def commit_db(request):
     if request.method == "GET":
+        print("helloooo")
         name = request.GET.get('name', None)
         email = request.GET.get('email', None)
         fromDate = request.GET.get('fromDate', None)
@@ -277,9 +278,13 @@ def commit_db(request):
         # toDate = request.GET.get('toDate', None)
         listRooms = request.GET.get('listRooms', None)
 
-        
+        print(name, email, fromDate, toDate, listRooms)
 
-    return
+        responseData = {
+            'sucsess' : 1
+        }
+
+    return JsonResponse(responseData)
 
 def user_profile(request):
     return render(request, 'HotelManagement/user_profile.html')
