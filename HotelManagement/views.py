@@ -11,9 +11,9 @@ from .models import User, Room, Schedule
 import sqlite3
 from HotelManagement import booking
 
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import inch
-from reportlab.lib.pagesizes import letter
+# from reportlab.pdfgen import canvas
+# from reportlab.lib.units import inch
+# from reportlab.lib.pagesizes import letter
 import io
 
 import HotelManagement
@@ -280,8 +280,8 @@ def commit_db(request):
 
         # Making the function there due to sqlite specific commands given there
         # and here have different parameters, return type etc.
-        booking.updateAllTables(name,email,fromDate,toDate,listRooms)
-    # return
+        booking.updateAllTables(email,fromDate,toDate,listRooms)
+        # return
         print(name, email, fromDate, toDate, listRooms)
 
         responseData = {

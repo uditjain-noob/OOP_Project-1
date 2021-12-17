@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 import requests
 import sqlite3
 import datetime
-
+import json
 #-----------Connection to the Database----
 # Need to add this cuz of an error. Reason unkonwn.
 link = sqlite3.connect("db.sqlite3",check_same_thread=False)
@@ -147,7 +147,7 @@ def LiveUpdate():
             """)
 #--------------------------------------------------------------------
 
-def updateAllTables(name,email,fromDate,toDate,room_list):
+def updateAllTables(email,fromDate,toDate,room_list):
 
     cursor.execute("""
                         SELECT id 
@@ -158,8 +158,12 @@ def updateAllTables(name,email,fromDate,toDate,room_list):
         # IF a user exists:
     if user_id != None and user_id != []:
         user_id = user_id[0][0]         #Double Nested ID
+        room_list = json.loads(room_list)
+        print("SzexY BREASST",type(room_list))
+
         if len(room_list) > 0:
-            for room_id,room_type in room_list:
+            for values in room_list:
+                room_id,room_type = values[0],values[1]
                 with link:
                     cursor.execute("""
                                     INSERT INTO HotelManagement_schedule 
@@ -174,10 +178,9 @@ def updateAllTables(name,email,fromDate,toDate,room_list):
             for room in room_types:
                 if room in room_type:
                     allrooms = allrooms + room + " "
+
             with link:
                 cursor.execute("""
                                 UPDATE HotelManagement_user
                                 SET rooms = :allRooms
                                 WHERE id = :user_id""",{'rooms':allrooms,'id':user_id})
-        
-        
