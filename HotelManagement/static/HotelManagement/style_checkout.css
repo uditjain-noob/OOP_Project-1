@@ -58,7 +58,31 @@ body {
 }
 
 #verifyportal {
+    padding-top: 50px;
     height: 700px;
+}
+
+.flex.flex-col.text-center.w-full.mb-20 {
+    margin-bottom: 20px;
+}
+
+.orderInfo {
+    margin: 40px 0px 40px 245px;
+}
+
+.orderInfo h3 {
+    padding: 10px 0px 5px 0px;
+    font-size: 20px;
+    color: black;
+    font-weight: 500;
+}
+
+.roomTypes td {
+    font-size: 17px;
+}
+
+.roomTypes th {
+    font-size: 15px;
 }
 
 /* .roomTypes {
