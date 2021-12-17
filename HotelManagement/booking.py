@@ -173,20 +173,27 @@ def updateAllTables(email,fromDate,toDate,room_list):
                                     'room_no':room_id,'r_type':room_type})
         
         room_types = ["Deluxe","Luxury","Presidential"]
-        allrooms = ''
+        allrooms = []
         for room_id,room_type in room_list:
+            with link:
+                cursor.execute(f"""
+                                    UPDATE HotelManagement_room
+                                    SET customer_id = {user_id}, is_empty = {False}, start_date = "{fromDate}", end_date = "{toDate}"
+                                    WHERE id = {room_id - 100};
+                                    """)
             for room in room_types:
                 if room in room_type:
-                    allrooms = allrooms + room + " "
-
-            with link:
-                cursor.execute("""
-                                UPDATE HotelManagement_user
-                                SET rooms = :allRooms
-                                WHERE id = :user_id""",{'rooms':allrooms,'id':user_id})
+                    # allrooms = allrooms + room + " "
+                    allrooms.append([room_id, room])
 
             # with link:
-            #     cursor.execute(f"""
+            #     cursor.execute("""
             #                     UPDATE HotelManagement_user
-            #                     SET rooms = {allrooms}
-            #                     WHERE id = {user_id}""")
+            #                     SET rooms = :allRooms
+            #                     WHERE id = :user_id""",{'rooms':allrooms,'id':user_id})
+
+            with link:
+                cursor.execute(f"""
+                                UPDATE HotelManagement_user
+                                SET rooms = "{allrooms}"
+                                WHERE id = {user_id}""")
