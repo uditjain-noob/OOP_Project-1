@@ -180,7 +180,7 @@ def room(request):
                             else:
                                 # DO SOMETHING idk lmao
                                 # ALREADY BOOKED ROOM
-                                return render(request, 'HotelManagement/login.html')
+                                return render(request, 'HotelManagement/room.html')
                 
                     else:
                         # WHAT TO DO IF PASSWORD INCORRECT
