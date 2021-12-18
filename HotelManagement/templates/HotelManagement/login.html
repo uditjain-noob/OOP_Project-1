@@ -1,57 +1,39 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="{% static 'HotelManagement/cStyle.css' %}">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'HotelManagement/cStyle.css' %}">
+    
 
 </head>
-
 <body>
-    <div class="loginPageContent">
-        <form
-            action="http://127.0.0.1:8000/book_room/"
-            method="post" class="loginForm"> {%
-            csrf_token %}
+    <div class="loginPageContent"> 
+        <form action="http://127.0.0.1:8000/book_room/" method="post" class="loginForm"> {% csrf_token %}
             <h3>Login Here</h3>
 
             <label for="username">Email</label>
-            <input type="text" placeholder="Email"
-                id="username" name="username">
+            <input type="text" placeholder="Email" id="username" name = "username">
 
             <label for="password">Password</label>
-            <input type="password"
-                placeholder="Password"
-                id="password" name="password">
+            <input type="password" placeholder="Password" id="password" name = "password">
 
-
+            
             <button>Log In</button>
             <div class="social">
-                <div class="register"><a
-                        href="http://127.0.0.1:8000/register/">Register</a>
-                </div>
+                <div class="register"><a href="http://127.0.0.1:8000/register/">Register</a></div>
             </div>
         </form>
 
         <div class="backgroundImage">
-            <img src="{% static 'HotelManagement/images/homePageBGFinal.jpg' %}"
-                alt="">
+            <img src="{% static 'HotelManagement/images/homePageBGFinal.jpg' %}" alt="">
         </div>
     </div>
 </body>
-
 </html>
 
 </body>
-
 </html>

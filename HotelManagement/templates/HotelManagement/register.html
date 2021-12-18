@@ -2,75 +2,51 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-        content="IE=edge">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="{% static 'HotelManagement/cStyle.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'HotelManagement/cStyle.css' %}">
 </head>
-
 <body>
     <div class="regPageContent">
-        <form class="regForm" method="post"
-            id="reg_form"
-            action="http://127.0.0.1:8000/verify/">
-            {% csrf_token %}
-            <h3>Register Here</h3>
-            <div class="form-group">
-                <label for="Name">Name</label>
-                <input id="Name" type="text"
-                    placeholder="Name" name="Name"
-                    value="{{ name }}">
-            </div>
-            <div class="form-group">
-                <label for="Email">Email</label>
-                <input id="Email" type="email"
-                    placeholder="Email"
-                    name="Email"
-                    value="{{ email }}">
-            </div>
-            <!-- <div class="form-group">
+            <form class="regForm" method="post" id="reg_form" action="http://127.0.0.1:8000/verify/"> {% csrf_token %}
+                <h3>Register Here</h3>
+                <div class="form-group">
+                    <label for="Name">Name</label>
+                    <input id="Name" type="text" placeholder="Name" name="Name" value="{{ name }}">
+                </div>
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input id="Email" type="email" placeholder="Email" name="Email" value="{{ email }}">
+                </div>
+                <!-- <div class="form-group">
                     <label for="PhoneNo">Phone Number: </label>
                     <input id="PhoneNo" type="text" name="PhoneNo" value="{{ phone_num }}"></input>
                 </div> -->
-            <div class="form-group"></div>
-            <label for="PWD">Password</label>
-            <input id="PWD" type="password"
-                placeholder="Password" name="PWD"
-                value="{{ pwd }}"></input>
-            <div class="form-group">
-                <button type="submit">Register
-                    Now</button>
+                <div class="form-group"></div>
+                    <label for="PWD">Password</label>
+                    <input id="PWD" type="password" placeholder="Password" name="PWD" value="{{ pwd }}"></input>
+                <div class="form-group">
+                    <button type="submit">Register Now</button>
+                </div>
+            </form>
+
+            <div class="backgroundImage">
+                <img src="{% static 'HotelManagement/images/homePageBGFinal.jpg' %}" alt="">
             </div>
-        </form>
-
-        <div class="backgroundImage">
-            <img src="{% static 'HotelManagement/images/homePageBGFinal.jpg' %}"
-                alt="">
-        </div>
     </div>
-
+    
     <script>
-        window.onload = function () {
-            if (localStorage) {
-                document.getElementById("reg_form").addEventListener("submit", function () {
+        window.onload = function() {
+            if (localStorage){
+                document.getElementById("reg_form").addEventListener("submit", function(){
                     localStorage.clear();
                     var nameLocal = document.getElementById("Name").value;
                     var emailLocal = document.getElementById("Email").value;
@@ -94,18 +70,8 @@
             }
         }
     </script>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
-
 </html>

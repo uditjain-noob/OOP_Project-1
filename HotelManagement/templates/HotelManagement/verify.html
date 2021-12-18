@@ -2,72 +2,42 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-        content="IE=edge">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="{% static 'HotelManagement/cStyle.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'HotelManagement/cStyle.css' %}">
 </head>
-
 <body>
     <div class="verifyPageContent">
-        <form autocomplete="off"
-            class="verifyForm" method="post"
-            id="code_form"
-            action="http://127.0.0.1:8000"> {%
-            csrf_token %}
+        <form autocomplete="off" class="verifyForm" method="post" id="code_form" action="http://127.0.0.1:8000"> {% csrf_token %}
             <div class="form-group" id="OTP">
-                <label
-                    for="verification_code">Verification
-                    Code</label>
-                <input id="verification_code"
-                    type="text"
-                    name="verification_code"
-                    placeholder="OTP">
+                <label for="verification_code">Verification Code</label>
+                <input id="verification_code" type="text" name="verification_code" placeholder="OTP">
             </div>
-            <div class="form-group"
-                id="submitBtn">
-                <button type="button"
-                    onclick="submitCode()">Submit</button>
+            <div class="form-group" id="submitBtn">
+                <button type="button" onclick = "submitCode()">Submit</button>
             </div>
         </form>
 
         <div class="backgroundImage">
-            <img src="{% static 'HotelManagement/images/homePageBGFinal.jpg' %}"
-                alt="">
+            <img src="{% static 'HotelManagement/images/homePageBGFinal.jpg' %}" alt="">
         </div>
     </div>
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script>
         console.log("{{ verification_code|safe }}")
-        function submitCode() {
+        function submitCode()
+        {
             form_verify = document.getElementById("code_form");
             input = document.getElementById("verification_code").value;
             let b = "{{ verification_code|safe }}";
@@ -75,37 +45,40 @@
             username = localStorage.getItem("nameLocal")
             UserEmail = localStorage.getItem("emailLocal")
             UserPWD = localStorage.getItem("pwdLocal")
-            if (input == b) {
+            if (input == b)
+            {
 
                 $.ajax(
                     {
                         url: '/reg_result/',
                         data: {
-                            'name': username,
-                            'email': UserEmail,
-                            'password': UserPWD,
+                            'name' : username,
+                            'email' : UserEmail,
+                            'password' : UserPWD,
                             'valid': 1
                         },
                         dataType: 'json',
-                        success: function (responseData) {
+                        success: function(responseData){
                             alert(responseData.message);
                         }
                     }
                 )
                 form_verify.submit()
             }
-            else {
+            else
+            {
                 $.ajax(
                     {
                         url: '/reg_result/',
                         data: {
-                            'name': username,
-                            'email': UserEmail,
-                            'password': UserPWD,
+                            'name' : username,
+                            'email' : UserEmail,
+                            'password' : UserPWD,
                             'valid': 0
                         },
                         dataType: 'json',
-                        success: function (responseData) {
+                        success: function (responseData) 
+                        {
                             alert(responseData.message);
                         }
                     }
@@ -117,5 +90,8 @@
         // console.log(b);
     </script>
 </body>
-
 </html>
+
+
+
+
