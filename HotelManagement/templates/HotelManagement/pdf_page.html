@@ -73,19 +73,39 @@
                     <td>Departure Date</td>
                     <td>{{ end_date }}</td>
                 </tr>
-                {% for room in roomsList %}
                 <tr>
                     <td>Room Type</td>
-                    <td>
-                        {% for roominfo in room %}
-                            {{ roominfo }}
-                        {% endfor %}
-                    </td>
+                    <td>Room Numbers</td>
+                </tr>
+                <tr>
+                    <td>Deluxe rooms</td>
+                </tr>
+                {% for room in deluxe_rooms %}
+                <tr>
+                    <td>*</td>
+                    <td>{{ room }}</td>
                 </tr>
                 {% endfor %}
-                <!-- <tr>
-
-                </tr> -->
+                <tr>
+                    
+                    <td>Luxury rooms</td>
+                </tr>
+                {% for room in luxury_rooms %}
+                <tr>
+                    <td>*</td>
+                    <td>{{ room }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    
+                    <td>Presidential rooms</td>
+                </tr>
+                {% for room in presidential_rooms %}
+                <tr>
+                    <td>*</td>
+                    <td>{{ room }}</td>
+                </tr>
+                {% endfor %}
             </table>
         </div>
     </div>

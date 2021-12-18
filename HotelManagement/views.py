@@ -332,6 +332,15 @@ def pdf_render(request):
         email = info[1]
         roomsList = info[2]
         roomsList = ast.literal_eval(roomsList)
+        roomsList_copy = [('Deluxe', []), ('Luxury', []), ('Presidential', [])]
+
+        for roomCategory in roomsList_copy:
+            category = roomCategory[0]
+            for roomInfo in roomsList:
+                if roomInfo[1] == category:
+                    roomCategory[1].append(roomInfo[0])
+
+        roomsList = roomsList_copy
         # roomsList = json.loads(roomsList)
         customer_id = info[3]
 
@@ -351,7 +360,10 @@ def pdf_render(request):
         'email' : email,
         'start_date' : start_date,
         'end_date' : end_date,
-        'rooms_list': roomsList
+        # 'rooms_list': roomsList
+        'deluxe_rooms': roomsList[0][1],
+        'luxury_rooms': roomsList[1][1],
+        'presidential_rooms': roomsList[2][1]
     }
     template = get_template('HotelManagement/pdf_page.html')
     html = template.render(context_data)
