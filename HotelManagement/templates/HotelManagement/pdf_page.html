@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="{% static 'HotelManagement/style_pdf.css' %}"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Dancing+Script&family=Varela+Round&display=swap" rel="stylesheet">
+    
     <title>Document</title>
 
     <style>
@@ -54,59 +59,79 @@
         <div class="hotelLogo">
             <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnandinipowercontrol.com%2Fwp-content%2Fuploads%2F2016%2F12%2FTheOceanPearl_logo.jpg&f=1&nofb=1" alt="">
         </div>
-        <div class="conletter">
+        <div class="conletter" style="font-size: 20px;">
             <h3>Dear Mr. {{ name }},</h3>
-            <h4>Thank you for choosing <b>Ocean Pearl</b>. It is our pleasure to confirm the following reservation. Please advise us if any changes need to be made to the reservation by calling us at xxx-xxx-xxxx.</h4>
+            <h4 style="font-size: 17px;">Thank you for choosing <b>Ocean Pearl</b>. It is our pleasure to confirm the following reservation. Please advise us if any changes need to be made to the reservation by calling us at xxx-xxx-xxxx.</h4>
             <table>
                 <tr>
-                    <h3>Reservation Details.</h3>
+                    <h3 style="font-size: 15px; margin-bottom: 0px;"><u>Reservation Details.</u></h3>
                 </tr>
-                <tr>
+                <tr style="font-size: 15px;">
                     <td>User Name</td>
                     <td>{{ name }}</td>
                 </tr>
-                <tr>
+                <tr style="font-size: 15px;">
+                    <td>User Email</td>
+                    <td>{{ email }}</td>
+                </tr>
+                <tr style="font-size: 15px;">
                     <td>Arrival Date</td>
                     <td>{{ start_date }}</td>
                 </tr>
-                <tr>
+                <tr style="font-size: 15px;">
                     <td>Departure Date</td>
                     <td>{{ end_date }}</td>
                 </tr>
                 <tr>
-                    <td>Room Type</td>
-                    <td>Room Numbers</td>
+                    <td></td>
                 </tr>
                 <tr>
+                    <td></td>
+                </tr>
+                <tr style="font-size: 15px; margin-bottom: 5px;">
+                    <td><b><u>Room Type<b><u></td>
+                    <td><b><u>Room Numbers<b><u></td>
+                </tr>
+                <tr style="font-size: 15px;">
                     <td>Deluxe rooms</td>
                 </tr>
                 {% for room in deluxe_rooms %}
-                <tr>
-                    <td>*</td>
+                <tr style="font-size: 15px;">
+                    <td>-</td>
                     <td>{{ room }}</td>
                 </tr>
                 {% endfor %}
-                <tr>
+                <tr style="font-size: 15px;">
                     
                     <td>Luxury rooms</td>
                 </tr>
                 {% for room in luxury_rooms %}
-                <tr>
-                    <td>*</td>
+                <tr style="font-size: 15px;">
+                    <td>-</td>
                     <td>{{ room }}</td>
                 </tr>
                 {% endfor %}
-                <tr>
+                <tr style="font-size: 15px;">
                     
                     <td>Presidential rooms</td>
                 </tr>
                 {% for room in presidential_rooms %}
-                <tr>
-                    <td>*</td>
+                <tr style="font-size: 15px;">
+                    <td>-</td>
                     <td>{{ room }}</td>
                 </tr>
                 {% endfor %}
             </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div>
+                <h3 style="font-size: 18px; margin-bottom: 0px;">Thank You,</h3>
+                <h3 style="font-size: 18px; margin-top: 0px;">Ocean Pearl</h3>
+            </div>
         </div>
     </div>
 </body>
