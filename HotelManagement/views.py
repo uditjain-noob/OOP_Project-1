@@ -10,11 +10,8 @@ from random import choices
 from .models import User, Room, Schedule    
 import sqlite3
 from HotelManagement import booking
-import json
-import ast
-
-from fpdf import FPDF
-
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 import io
 
 import HotelManagement
@@ -346,16 +343,27 @@ def pdf_render(request):
 
     start_date, end_date = cursor.fetchall()[0]
     print(start_date, end_date) 
+    context_data = {
+        'name' : name,
+        'email' : email,
+        'start_date' : start_date,
+        'end_date' : end_date,
+        'rooms_list': roomsList
+    }
+    template = get_template('HotelManagement/pdf_page.html')
+    html = template.render(context_data)
 
-    pdf = FPDF('P', 'mm', 'Letter')
-    pdf.add_page()
-    pdf.set_font('helvetica', '', 16)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="booking_info.pdf"'
 
-    pdf.cell(0, 10, f'Name: {name}', ln=1)
+    pisa_status = pisa.CreatePDF(
+        html, dest=response)
 
-    pdf.output("booking_info.pdf", dest=buffer)
+    if pisa_status.err:
+        return HttpResponse('Error, pdf not found')
 
-    return FileResponse(buffer, filename="booking_info.pdf", as_attachment=True)
+    return response
+    # return FileResponse(content, filename="booking_info.pdf")
 
     
 
