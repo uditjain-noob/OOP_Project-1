@@ -355,7 +355,7 @@ def pdf_render(request):
 
     pdf.output("booking_info.pdf", dest=buffer)
 
-    return FileResponse(buffer, filename="booking_info.pdf")
+    return FileResponse(buffer, filename="booking_info.pdf", as_attachment=True)
 
     
 
