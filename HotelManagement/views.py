@@ -15,6 +15,7 @@ from xhtml2pdf import pisa
 import io
 
 import HotelManagement
+import ast
 # from booking import *      # Booking File Import for DB Functions
 #-------------------------------------
 
@@ -330,9 +331,11 @@ def pdf_render(request):
         name = info[0]
         email = info[1]
         roomsList = info[2]
+        roomsList = ast.literal_eval(roomsList)
         # roomsList = json.loads(roomsList)
         customer_id = info[3]
 
+    print(roomsList, type(roomsList))
     print(customer_id)
 
     with db:
