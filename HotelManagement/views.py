@@ -177,7 +177,19 @@ def room(request):
                             else:
                                 # DO SOMETHING idk lmao
                                 # ALREADY BOOKED ROOM
-                                return render(request, 'HotelManagement/room.html')
+                            
+                                with link:
+                                    cursor.execute(f"""
+                                        SELECT name FROM HotelManagement_user
+                                        WHERE email = "{email}";
+                                    """)
+
+                                name = cursor.fetchone()[0]
+                                context_data = {
+                                    'email' : email,
+                                    'name' : name
+                                }
+                                return render(request, 'HotelManagement/user_profile.html', context = context_data)
                 
                     else:
                         # WHAT TO DO IF PASSWORD INCORRECT
@@ -186,10 +198,7 @@ def room(request):
                 else:
                     # IF PASSWORD NOT FOUND
                     return render(request, 'HotelManagement/login.html')
-            
-            
-
-       
+                 
     else:
         return render(request, 'HotelManagement/login.html')
 
@@ -203,7 +212,7 @@ def room_params(request):
         number_presidential = request.GET.get('number_presidential', None)
 
         print(type(number_luxury))
-        # nigga koad ignor
+        
         if number_deluxe == "":
             number_deluxe = 0
         
@@ -212,6 +221,8 @@ def room_params(request):
         
         if number_presidential == "":
             number_presidential = 0
+
+        print(email) #marker
 
         db = sqlite3.connect('db.sqlite3', check_same_thread=False)
         cursor = db.cursor()
@@ -290,7 +301,7 @@ def commit_db(request):
 
 
         responseData = {
-            'success' : '1'
+            'message' : 'PAYMENT SUCCESSFUL\nCheck the profile section for information on rooms allocated.'
         }
 
     return JsonResponse(responseData)
