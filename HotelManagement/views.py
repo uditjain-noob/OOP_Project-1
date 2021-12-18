@@ -368,5 +368,8 @@ def pdf_render(request):
     return response
     # return FileResponse(content, filename="booking_info.pdf")
 
+
+def pdf(request):
+    return render(request, 'HotelManagement/pdf_page.html')
     
 

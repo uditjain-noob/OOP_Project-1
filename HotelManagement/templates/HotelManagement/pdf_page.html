@@ -1,12 +1,93 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{% static 'HotelManagement/style_pdf.css' %}"> -->
     <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            list-style-type: none;
+            text-decoration: none;
+        }
+
+        h3, h4, p, a {
+            font-family: 'Varela Round', sans-serif;
+            font-weight: 500;
+        }
+
+        body {
+            /* width: 1200px; */
+            width: 100%;
+            background-color: wheat;
+        }
+
+        .datacontainer {
+            width: 800px;
+            background-color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .hotelLogo img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            /* background-color: white; */
+            /* align-items: center;
+            justify-content: center; */
+        }
+    </style>
+
 </head>
 <body>
-    name : {{ name }}
+    <div class="datacontainer">
+        <div class="hotelLogo">
+            <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnandinipowercontrol.com%2Fwp-content%2Fuploads%2F2016%2F12%2FTheOceanPearl_logo.jpg&f=1&nofb=1" alt="">
+        </div>
+        <div class="conletter">
+            <h3>Dear Mr. {{ name }},</h3>
+            <h4>Thank you for choosing <b>Ocean Pearl</b>. It is our pleasure to confirm the following reservation. Please advise us if any changes need to be made to the reservation by calling us at xxx-xxx-xxxx.</h4>
+            <table>
+                <tr>
+                    <h3>Reservation Details.</h3>
+                </tr>
+                <tr>
+                    <td>User Name</td>
+                    <td>{{ name }}</td>
+                </tr>
+                <tr>
+                    <td>Arrival Date</td>
+                    <td>{{ start_date }}</td>
+                </tr>
+                <tr>
+                    <td>Departure Date</td>
+                    <td>{{ end_date }}</td>
+                </tr>
+                {% for room in roomsList %}
+                <tr>
+                    <td>Room Type</td>
+                    <td>
+                        {% for roominfo in room %}
+                            {{ roominfo }}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+                <!-- <tr>
+
+                </tr> -->
+            </table>
+        </div>
+    </div>
 </body>
 </html>
