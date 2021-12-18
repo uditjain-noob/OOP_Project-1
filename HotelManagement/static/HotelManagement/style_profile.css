@@ -1,172 +1,172 @@
-body{
-    background: -webkit-linear-gradient(top, wheat, antiquewhite);
-    font-family: 'Varela Round', sans-serif;
-    height: 760px;
+body {
+  background: -webkit-linear-gradient(top, wheat, antiquewhite);
+  font-family: "Varela Round", sans-serif;
+  height: 760px;
 }
 
-.emp-profile{
-    padding: 3%;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    border-radius: 0.5rem;
-    background: rgb(255, 248, 239);
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: rgb(255, 248, 239);
 }
 
-.profile-img{
-    text-align: center;
+.profile-img {
+  text-align: center;
 }
 
-.profile-img img{
-    width: 70%;
-    height: 100%;
+.profile-img img {
+  width: 70%;
+  height: 100%;
 }
 
 .profile-img .file {
-    position: relative;
-    overflow: hidden;
-    margin-top: -20%;
-    width: 70%;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    background: #212529b8;
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
 }
 
 .profile-img .file input {
-    position: absolute;
-    opacity: 0;
-    right: 0;
-    top: 0;
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
 }
 
-.profile-head h5{
-    color: #333;
+.profile-head h5 {
+  color: #333;
 }
 
-.profile-head h6{
-    color: #0062cc;
+.profile-head h6 {
+  color: #0062cc;
 }
 
-.profile-edit-btn{
-    border: none;
-    border-radius: 1.5rem;
-    width: 70%;
-    padding: 2%;
-    font-weight: 600;
-    color: #6c757d;
-    cursor: pointer;
+.profile-edit-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
 }
 
-.proile-rating{
-    font-size: 12px;
-    color: #818182;
-    margin-top: 5%;
+.proile-rating {
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
 }
 
-.proile-rating span{
-    color: #495057;
-    font-size: 15px;
-    font-weight: 600;
+.proile-rating span {
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-.profile-head .nav-tabs{
-    margin-bottom:5%;
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
 }
 
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
-    border: none;
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
 }
 
-.profile-head .nav-tabs .nav-link.active{
-    border: none;
-    border-bottom:2px solid #0062cc;
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #0062cc;
 }
 
-.profile-work{
-    padding: 14%;
-    margin-top: -15%;
+.profile-work {
+  padding: 14%;
+  margin-top: -15%;
 }
 
-.profile-work p{
-    font-size: 12px;
-    color: #818182;
-    font-weight: 600;
-    margin-top: 10%;
+.profile-work p {
+  font-size: 12px;
+  color: #818182;
+  font-weight: 600;
+  margin-top: 10%;
 }
 
-.profile-work a{
-    text-decoration: none;
-    color: #495057;
-    font-weight: 600;
-    font-size: 14px;
+.profile-work a {
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-.profile-work ul{
-    list-style: none;
+.profile-work ul {
+  list-style: none;
 }
 
-.profile-tab label{
-    font-weight: 600;
+.profile-tab label {
+  font-weight: 600;
 }
 
-.profile-tab p{
-    font-weight: 600;
-    color: #0062cc;
+.profile-tab p {
+  font-weight: 600;
+  color: #0062cc;
 }
 
 .homedirect {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 #homeBtn {
-    background-color: wheat;
-    color: black;
-    position: relative;
+  background-color: wheat;
+  color: black;
+  position: relative;
 }
 
-#homeBtn a{
-    text-decoration: none;
+#homeBtn a {
+  text-decoration: none;
 }
 
 .homedirect {
-    margin-left: 48%;
+  margin-left: 48%;
 }
 
 #homeBtn a:before {
-    content: "a";
-    position: absolute;
-    margin-top: 33px;
-    left: 50%;
-    background-color: black;
-    width: 0%;
-    height: 2.5px;
-    font-size: 0px;
-    transition: all 0.5s ease;
+  content: "a";
+  position: absolute;
+  margin-top: 33px;
+  left: 50%;
+  background-color: black;
+  width: 0%;
+  height: 2.5px;
+  font-size: 0px;
+  transition: all 0.5s ease;
 }
 
 #homeBtn a:hover:before {
-    width: 60%;
-    left: 20%;
+  width: 60%;
+  left: 20%;
 }
 
 .profile-head h5 {
-    padding-top: 60px;
+  padding-top: 60px;
 }
 
 .nav-tabs {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 #profileContent {
-    margin-left: 34%;
+  margin-left: 34%;
 }
 
 #pfp {
-    margin-top: 50%;
+  margin-top: 50%;
 }
 
 .profile-head h5 {
-    font-size: 25px;
-    font-weight: 600;
+  font-size: 25px;
+  font-weight: 600;
 }

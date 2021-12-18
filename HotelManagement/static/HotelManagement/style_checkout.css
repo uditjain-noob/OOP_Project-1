@@ -1,88 +1,88 @@
 body {
-    background: -webkit-linear-gradient(top, wheat, antiquewhite);
-    font-family: 'Varela Round', sans-serif;
-    height: 760px;
+  background: -webkit-linear-gradient(top, wheat, antiquewhite);
+  font-family: "Varela Round", sans-serif;
+  height: 760px;
 }
 
 #homeBtn a {
-    margin-left: 20px;
-    font-size: 20px !important;
-    text-decoration: none;
-    position: relative;
+  margin-left: 20px;
+  font-size: 20px !important;
+  text-decoration: none;
+  position: relative;
 }
 
 #homeBtn a:before {
-    content: "a";
-    position: absolute;
-    margin-top: 33px;
-    left: 0%;
-    background-color: black;
-    width: 0%;
-    height: 2px;
-    font-size: 0px;
-    transition: all 0.5s ease;
+  content: "a";
+  position: absolute;
+  margin-top: 33px;
+  left: 0%;
+  background-color: black;
+  width: 0%;
+  height: 2px;
+  font-size: 0px;
+  transition: all 0.5s ease;
 }
 
 #homeBtn a:hover:before {
-    width: 100%;
+  width: 100%;
 }
 
 #verifyModal {
-    background-color: white;
-    border-radius: 15px;
-    /* justify-content: center;
+  background-color: white;
+  border-radius: 15px;
+  /* justify-content: center;
     align-items: center; */
-    /* width: 600px; */
+  /* width: 600px; */
 }
 
 #pageHeader {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 #payBtn button {
-    margin: auto;
-    margin-bottom: 20px;
-    font-size: 20px;
-    /* background-color: rgb(252 165 165); */
-    background-color: #90EE90;
-    color: black !important;
-    /* align-items: center; */
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 20px;
+  /* background-color: rgb(252 165 165); */
+  background-color: #90ee90;
+  color: black !important;
+  /* align-items: center; */
 }
 
 .gaeyourmom td {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 #rohit {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 #verifyportal {
-    padding-top: 50px;
-    height: 700px;
+  padding-top: 50px;
+  height: 700px;
 }
 
 .flex.flex-col.text-center.w-full.mb-20 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .orderInfo {
-    margin: 40px 0px 40px 245px;
+  margin: 40px 0px 40px 245px;
 }
 
 .orderInfo h3 {
-    padding: 10px 0px 5px 0px;
-    font-size: 20px;
-    color: black;
-    font-weight: 500;
+  padding: 10px 0px 5px 0px;
+  font-size: 20px;
+  color: black;
+  font-weight: 500;
 }
 
 .roomTypes td {
-    font-size: 17px;
+  font-size: 17px;
 }
 
 .roomTypes th {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 /* .roomTypes {
