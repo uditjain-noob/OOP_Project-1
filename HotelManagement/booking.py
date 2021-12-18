@@ -159,7 +159,16 @@ def updateAllTables(email,fromDate,toDate,room_list):
     if user_id != None and user_id != []:
         user_id = user_id[0][0]         #Double Nested ID
         # room_list = json.loads(room_list)
-        print("SzexY BREASST",type(room_list))
+
+    cursor.execute("""
+                        SELECT customer_id 
+                        FROM HotelManagement_user
+                        WHERE email = :mail""", {'mail':email})
+    customer_id = cursor.fetchall()
+
+        # IF a user exists:
+    if customer_id != None and user_id != []:
+        customer_id = customer_id[0][0]
 
         if len(room_list) > 0:
             for values in room_list:
@@ -169,8 +178,9 @@ def updateAllTables(email,fromDate,toDate,room_list):
                                     INSERT INTO HotelManagement_schedule 
                                     (customer_id,start_date,end_date,room_booked,room_type)
                                     VALUES        (:id,:s_date,:e_date,:room_no,:r_type);"""
-                                    ,{'id':user_id,'s_date':str(fromDate),'e_date':str(toDate),
+                                    ,{'id':customer_id,'s_date':str(fromDate),'e_date':str(toDate),
                                     'room_no':room_id,'r_type':room_type})
+                                    # Nigga inserted id into customer_id (fixed)
         
         room_types = ["Deluxe","Luxury","Presidential"]
         allrooms = []
@@ -178,7 +188,7 @@ def updateAllTables(email,fromDate,toDate,room_list):
             with link:
                 cursor.execute(f"""
                                     UPDATE HotelManagement_room
-                                    SET customer_id = {user_id}, is_empty = {False}, start_date = "{fromDate}", end_date = "{toDate}"
+                                    SET customer_id = {customer_id}, is_empty = {False}, start_date = "{fromDate}", end_date = "{toDate}"
                                     WHERE id = {room_id - 100};
                                     """)
             for room in room_types:
@@ -197,3 +207,4 @@ def updateAllTables(email,fromDate,toDate,room_list):
                                 UPDATE HotelManagement_user
                                 SET rooms = "{allrooms}"
                                 WHERE id = {user_id}""")
+                                

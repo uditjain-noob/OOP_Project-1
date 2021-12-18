@@ -1,6 +1,6 @@
 from os import curdir
 from sqlite3.dbapi2 import Cursor
-from django.http.response import JsonResponse
+from django.http.response import FileResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.mail import send_mail
@@ -13,9 +13,8 @@ from HotelManagement import booking
 import json
 import ast
 
-# from reportlab.pdfgen import canvas
-# from reportlab.lib.units import inch
-# from reportlab.lib.pagesizes import letter
+from fpdf import FPDF
+
 import io
 
 import HotelManagement
@@ -317,4 +316,46 @@ def user_profile(request):
         'name' : name,
             }
     return render(request, 'HotelManagement/user_profile.html', context=context_data)
+
+def pdf_render(request):
+    buffer = io.BytesIO()
+    email = request.session['loggedInEmail']
+
+    db = sqlite3.connect('db.sqlite3', check_same_thread=False)
+    cursor = db.cursor()
+    with db:
+        cursor.execute(f"""
+                    SELECT name, email, rooms, customer_id FROM HotelManagement_user
+                    WHERE email = "{email}";
+                """)
+
+        info = cursor.fetchall()[0]
+        name = info[0]
+        email = info[1]
+        roomsList = info[2]
+        # roomsList = json.loads(roomsList)
+        customer_id = info[3]
+
+    print(customer_id)
+
+    with db:
+        cursor.execute(f"""
+                    SELECT start_date, end_date FROM HotelManagement_schedule
+                    WHERE customer_id = {int(customer_id)};
+                """)
+
+    start_date, end_date = cursor.fetchall()[0]
+    print(start_date, end_date) 
+
+    pdf = FPDF('P', 'mm', 'Letter')
+    pdf.add_page()
+    pdf.set_font('helvetica', '', 16)
+
+    pdf.cell(0, 10, f'Name: {name}', ln=1)
+
+    pdf.output("booking_info.pdf", dest=buffer)
+
+    return FileResponse(buffer, filename="booking_info.pdf")
+
+    
 
