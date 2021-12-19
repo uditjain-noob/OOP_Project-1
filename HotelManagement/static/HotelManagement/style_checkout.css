@@ -1,5 +1,6 @@
 body {
-  background: -webkit-linear-gradient(top, wheat, antiquewhite);
+  /* background: -webkit-linear-gradient(top, wheat, antiquewhite); */
+  background-color: wheat;
   font-family: "Varela Round", sans-serif;
   height: 760px;
 }
