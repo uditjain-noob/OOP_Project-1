@@ -1,3 +1,4 @@
+from datetime import datetime
 from os import curdir
 from sqlite3.dbapi2 import Cursor
 from django.http.response import FileResponse, JsonResponse
@@ -263,6 +264,9 @@ def room_list(request):
     # Make the Booking and Return the Booked Rooms
     listRooms = booking.bookRoom(request)
     request.session['listRooms'] = listRooms
+    startDate = datetime.strptime(request.session['fromDate'], "%Y-%m-%d")
+    endDate = datetime.strptime(request.session['toDate'], "%Y-%m-%d")
+    daysQ = (endDate - startDate).days
     context_data = {
         'name' : request.session['name'],
         'listRooms' : listRooms,
@@ -270,12 +274,12 @@ def room_list(request):
         'fromDate' :  request.session['fromDate'],
         'toDate' : request.session['toDate'],
         'deluxeQuantity' : int(request.session['number_deluxe']),
-        'deluxePrice' : 1000 * int(request.session['number_deluxe']),
+        'deluxePrice' : 1000 * int(request.session['number_deluxe']) * daysQ,
         'luxuryQuantity' : int(request.session['number_luxury']),
-        'luxuryPrice' : 3000 * int(request.session['number_luxury']),
+        'luxuryPrice' : 3000 * int(request.session['number_luxury']) * daysQ,
         'presidentialQuantity' : int(request.session['number_presidential']),
-        'presidentialPrice' : 7000 * int(request.session['number_presidential']),
-        'totalPrice' : 1000 * int(request.session['number_deluxe']) + 3000 * int(request.session['number_luxury']) + 7000 * int(request.session['number_presidential'])
+        'presidentialPrice' : 7000 * int(request.session['number_presidential']) * daysQ,
+        'totalPrice' : (1000 * int(request.session['number_deluxe']) + 3000 * int(request.session['number_luxury']) + 7000 * int(request.session['number_presidential'])) * daysQ
     }
     # IF not avaiable give an error message
     return render(request, 'HotelManagement/room_list.html', context = context_data)
